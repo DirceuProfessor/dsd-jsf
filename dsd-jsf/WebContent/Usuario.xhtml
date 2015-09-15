@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body>
+	<h:form id="Usuario">
+		<h:outputLabel for="nome" value="Nome:" />
+		<h:inputText id="nome" value="#{usuarioBean.usuario.nome}"
+			required="true" />
+
+		<h:message for="nome" style="color:red" />
+		<br></br>
+		<h:outputLabel for="email" value="Email:" />
+		<h:inputText id="email" value="#{usuarioBean.usuario.email}"
+			required="true"/>
+
+		<h:message for="email" style="color:red" />
+		<br></br>
+		<h:outputLabel for="confirmacaoEmail" value="Confirmacao Email:" />
+		<h:inputText id="confirmacaoEmail"
+			value="#{usuarioBean.confirmacaoEmail}" required="true" />
+		<h:message for="confirmacaoEmail" style="color:red" />
+				<br></br>
+		<h:commandButton value="Salvar" action="#{usuarioBean.register}" />
+	</h:form>
+</h:body>
+</html>
