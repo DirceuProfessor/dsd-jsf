@@ -30,7 +30,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 @EnableJpaRepositories("br.unip.dsd.repositorios")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"br.unip.dsd.modelos", "br.unip.dsd.bean"})
+@ComponentScan(basePackages = {"br.unip.dsd.modelos", "br.unip.dsd.bean","br.unip.dsd.service"})
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 public class JPAConfig //extends WebMvcConfigurerAdapter 

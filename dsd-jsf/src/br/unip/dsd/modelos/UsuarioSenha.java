@@ -1,5 +1,6 @@
 package br.unip.dsd.modelos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class UsuarioSenha {
 	
 	private String password;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Usuario usuario;
 

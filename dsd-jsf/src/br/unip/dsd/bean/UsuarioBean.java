@@ -9,7 +9,9 @@ import br.unip.dsd.modelos.Usuario;
 import br.unip.dsd.modelos.UsuarioSenha;
 import br.unip.dsd.repositorios.RepositorioUsuario;
 import br.unip.dsd.repositorios.RepositorioUsuarioSenha;
+import br.unip.dsd.service.ServicoUsuario;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Component;
 import br.unip.dsd.factory.MessageFactory;
 
 @Component
-@ManagedBean
+@ManagedBean(name="usuarioBean")
 public class UsuarioBean  implements Serializable{
 
 	/**
@@ -34,14 +36,15 @@ public class UsuarioBean  implements Serializable{
 	
 	private UsuarioSenha usuarioSenha = new UsuarioSenha();
 	private Usuario usuario = new Usuario();
-	private String passwordConfirm;
+	private String confirmacaoSenha;
 	private String confirmacaoEmail;
 	private List<Usuario> usuarios = Collections.<Usuario>emptyList();
-	
+	@Autowired
+	private ServicoUsuario servicoUsuario;
 	
 	
 	public List<Usuario> getUsuarios() {
-		return repositorioUsuario.findAll();
+		return servicoUsuario.findAll();
 	}
 
 	public void setUsuarios(List<Usuario> usuarios) {
@@ -109,25 +112,28 @@ public class UsuarioBean  implements Serializable{
 		return maritalStati; 
 	}
 
-	@Autowired
-	private RepositorioUsuario repositorioUsuario;
-	@Autowired
-	private RepositorioUsuarioSenha repositorioUsuarioSenha;
+	
 
 	public String register() throws Exception {
 		String toReturn = "failure";
 
 		if (validateData()) {
 			try {
-				// save locale information, in case the user chose a language on the welcome page
-				Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-				//        usuario.setLocaleCountry(locale.getCountry());
-				//        usuario.setLocaleLanguage(locale.getLanguage());
-
-				usuario  = repositorioUsuario.saveAndFlush(usuario);
+				servicoUsuario.gravaUsuario(usuario, usuarioSenha);
+//				usuarioSenha.setId(usuario.getId());
 //				usuarioSenha = repositorioUsuarioSenha.save(usuarioSenha);
 				//        usuario = entities.createPerson(usuario);
+				String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId()+"#sec2";
 				toReturn = "success";
+				ExternalContext ec = FacesContext.getCurrentInstance()
+				        .getExternalContext();
+				try {
+				    ec.redirect(ec.getRequestContextPath()
+				            + viewId);
+				} catch (IOException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
 			} 
 			catch (EntityExistsException exist) {
 				MessageFactory msg = new MessageFactory();
@@ -164,10 +170,10 @@ public class UsuarioBean  implements Serializable{
 			toReturn = false;
 		}
 		// check passwordConfirm is same as password
-		if (passwordConfirm !=null && !passwordConfirm.equals(usuarioSenha.getPassword())) {
-			ctx.addMessage("registerForm:passwordConfirm", 
+		if (confirmacaoSenha !=null && !confirmacaoSenha.equals(usuarioSenha.getPassword())) {
+			ctx.addMessage("Usuario:confirmacaoSenha", 
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-							msg.getMessage("errorPasswordConfirm"), null));
+							msg.getMessage("erroConfirmacaoSenha"), null));
 			toReturn = false;
 		}
 		return toReturn;
@@ -181,11 +187,18 @@ public class UsuarioBean  implements Serializable{
 		this.confirmacaoEmail = emailConfirm;
 	}
 
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setConfirmacaoSenha(String passwordConfirm) {
+		this.confirmacaoSenha = passwordConfirm;
+	}
+	
+	public String cancelar() {
+		this.confirmacaoEmail="";
+		this.usuario = new Usuario();
+		this.usuarioSenha = new UsuarioSenha();
+		return "success";
 	}
 }
