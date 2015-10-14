@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>DSD</title>
+		<meta name="generator" content="Dirceu Semighini Filho" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body>
+
+<div class="navbar navbar-fixed-top alt" data-spy="affix" data-offset-top="1000">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">Home</a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#sec1">Sistema Antigo</a></li>
+        <li><a href="#sec2">Banco de Dados</a></li>
+        <li><a href="#sec3">Transações</a></li>
+        <li><a href="#sec4">Como declarar?</a></li>
+        <li><a href="#sec5">Camada de serviço</a></li>
+        <li><a href="#sec6">Comentários das provas</a></li>
+      </ul>
+    </div>
+   </div>
+</div>
+Salvar
+<div class="header alt vert">
+  <div class="container">
+    
+    <h1>Cadastro de Usuários</h1>
+      <p class="lead">Sistema desenvolvido em DSD</p>
+      <div>&nbsp;</div>
+      <a href="UsuarioEstilo.xhtml" class="btn btn-default btn-lg">Cadastre-se</a>
+      <a href="#sec1" class="btn btn-default btn-lg">Próximo passo<i class="icon-chevron-right"></i></a>
+  </div>
+</div>
+
+<hr>
+
+<div id="sec1" class="blurb">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Até agora tinhamos um sistema feio</h1>
+        <p class="lead">A partir de agora vamos aprender a deixá-lo amigável e visualmente agradável e multi dispositivos</p>
+        <p class="lead">Utilizaremos um design parallax</p>
+      </div>
+      <div class="col-md-5">
+        <h1 class="pull-right"><i class="icon-mobile-phone icon-3x"></i> <i class="icon-tablet icon-3x"></i> <i class="icon-laptop icon-3x"></i></h1>
+      </div>
+    </div>
+      <div>&nbsp;</div>
+      <a href="index.html" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+      <a href="#sec2" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>
+  
+  </div>
+</div>
+
+<div class="featurette" id="sec2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Banco de dados</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7 text-left">
+      	  <h3>Banco de dados ACID</h3>
+      	  <h5><font size="5">Atomico</font></h5>
+      	  <h5><font size="5">Consistente</font></h5>
+      	  <h5><font size="5">Isolado</font></h5>
+      	  <h5><font size="5">Durabilidade</font></h5>
+          <h4>Para gravar em múltiplas tabelas precisamos de transações</h4>
+          <h3>O que são transações?</h3>
+          <h5><font size="5">@Transactional</font></h5>
+          <div>&nbsp;</div>
+          <a href="#sec1" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+          <a href="#sec3" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout" id="sec3">
+  <div class="vert">
+    <div class="col-md-12 text-center"><font size="6">Transações aninhadas</font></div>
+    <div class="col-md-12 text-center">&nbsp;</div>
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <div class="row hidden-xs">
+       	  <h5><font size="5">Mandatória: Transação anterior obrigatória</font></h5>
+      	  <h5><font size="5">Aninhada: Transação interna independente</font></h5>
+      	  <h5><font size="5">Necessita de uma Nova: Transação nova e idependente é criada</font></h5>
+      	  <h5><font size="5">Nunca: Não suporta transação, caso tenha Exception</font></h5>
+          <h5><font size="5">Não suportada: Não necessita, não cria e não usa, caso tenha</font></h5>
+          <h5><font size="5">Suportada: Usa se tiver, senão não usa</font></h5>
+          <h5><font size="5">Requerida: Usa se tiver, senão cria, valor padrão</font></h5>          
+          <div>&nbsp;</div>
+          <a href="#sec2" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+          <a href="#sec4" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>       
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="blurb" id="sec4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Como declarar?</h1>
+          <h5><font size="5">@Transaction(propagation = Propagation.MANDATORY)</font></h5>          
+          <div>&nbsp;</div>
+          <h1>Transação ReadOnly</h1>
+          <h5><font size="5">@Transaction(readOnly = true)</font></h5>          
+          <h5><font size="5">Transação ReadOnly?</font></h5>          
+          <div>&nbsp;</div>
+          <a href="#sec3" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+          <a href="#sec5" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>       
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="blurb bright" id="sec5">
+  
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h2>Camada de Serviço</h2>
+        <br>
+         <h5><font size="5">Praque serve?</font></h5>          
+          <div>&nbsp;</div>
+          <h5><font size="5">Quando usar?</font></h5>          
+          <h5><font size="5">E o controller?</font></h5>          
+          <div>&nbsp;</div>
+          <a href="#sec4" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+          <a href="#sec6" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>    	
+    </div>
+</div>
+</div>
+
+<div class="blurb" id="sec6">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h1><i class="icon-plane icon-3x"></i></h1>
+      </div>
+      <div class="col-md-7">
+        <h1 class="pull-right">Comentários das Provas</h1>
+        <p class="lead pull-right">Maven deploy não faz deploy do aplicativo web, ele faz deploy do arquivo do seu build em um repositório maven!</p>  
+        <p class="lead pull-left">Maven é um gerenciador de build</p>
+        <p class="lead pull-right">JSF também é MVC, mas de forma acoplada a camada de software e com UI componentizada</p>
+        <p class="lead pull-right">Spring Data é uma api para acessar os dados do sistema armazenador de dados da sua aplicação</p>         	
+      </div>
+      <div>&nbsp;</div>
+          <a href="#sec5" class="btn btn-default btn-lg"><i class="icon-chevron-left"> Anterior</i></a>
+          <a href="#sec7" class="btn btn-default btn-lg">Próximo <i class="icon-chevron-right"></i> </a>    
+    </div>
+  </div>
+</div>
+
+
+
+<div class="blurb" id="sec7">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h3>Compartilhe esta experiência</h3>
+        <p class="lead"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <ul class="list-inline">
+          <li><a class="icon-twitter icon-2x" href="https://twitter.com/dirceusprof"></a></li>
+          <li><a class="icon-google-plus icon-2x" href="https://plus.google.com/117917313792385870035/posts"></a></li>
+        </ul>
+        <hr>
+        <p>Feito com <i class="icon-heart-empty"></i> em <a href="http://www.bootply.com">Bootply</a>.<br>Company ©2014</p>
+        <p>Adaptado por <a href="http://dirceuprofessor.blogspot.com.br">Dirceu Semighini Filho</a>.<br></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<ul class="nav pull-right scroll-down">
+  <li><a href="#" title="Scroll down"><i class="icon-chevron-down icon-3x"></i></a></li>
+</ul>
+<ul class="nav pull-right scroll-top">
+  <li><a href="#" title="Scroll to top"><i class="icon-chevron-up icon-3x"></i></a></li>
+</ul>
+
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+	</body>
+</html>
