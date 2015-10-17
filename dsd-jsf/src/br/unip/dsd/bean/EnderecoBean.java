@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 import br.unip.dsd.modelos.Endereco;
 import br.unip.dsd.modelos.Estado;
+import br.unip.dsd.modelos.TipoLogradouro;
 import br.unip.dsd.repositorios.RepositorioEstado;
+import br.unip.dsd.repositorios.RepositorioTipoLogradouro;
 
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -23,9 +25,16 @@ import java.util.stream.StreamSupport;
 public class EnderecoBean {
 
 	private RepositorioEstado repositorioEstado;
+	private RepositorioTipoLogradouro repositorioLogradouro;
 
 	@Autowired
-	public EnderecoBean(RepositorioEstado repositorioEstado){
+	public EnderecoBean(RepositorioEstado repositorioEstado,RepositorioTipoLogradouro repositorioLogradouro){
+		this.repositorioEstado = repositorioEstado;
+		this.repositorioLogradouro = repositorioLogradouro;
+		dbInit();
+	}
+	private void dbInit(){
+
 		List<Estado> estados = new ArrayList<Estado>();
 		estados.add(new Estado(1l,"Maranhão","MA"));
 		estados.add(new Estado(2l,"Sergipe","SE"));
@@ -53,8 +62,14 @@ public class EnderecoBean {
 		estados.add(new Estado(24l,"Bahia","BA"));
 		estados.add(new Estado(25l,"Minas Gerais","MG"));
 		estados.add(new Estado(26l,"Distrito Federal","DF"));
-		this.repositorioEstado = repositorioEstado;
 		repositorioEstado.save(estados);
+		List<TipoLogradouro> logradouros = new ArrayList<TipoLogradouro>();
+		logradouros.add(new TipoLogradouro(1l,"Rua"));
+		logradouros.add(new TipoLogradouro(2l,"Avenida"));
+		logradouros.add(new TipoLogradouro(3l,"Praça"));
+		logradouros.add(new TipoLogradouro(4l,"Travessa"));
+		logradouros.add(new TipoLogradouro(5l,"Alameda"));
+		repositorioLogradouro.save(logradouros);
 	}
 	private Endereco endereco;
 	
@@ -67,6 +82,14 @@ public class EnderecoBean {
 		this.endereco = endereco;
 	}
 		
+	public Collection getListaTipoLogradouro(){  
+		Stream<TipoLogradouro> stream = StreamSupport.stream(repositorioLogradouro.findAll().spliterator(),false);
+		Object[] itens = stream.map(tipoLogradouro ->
+		new SelectItem(tipoLogradouro.getId(),tipoLogradouro.getNome())).toArray();
+		return Arrays.asList(itens);
+		
+		}  
+	
 	public Collection getListaEstados(){  
 		Stream<Estado> stream = StreamSupport.stream(repositorioEstado.findAll().spliterator(),false);
 		Object[] itens = stream.map(estado ->

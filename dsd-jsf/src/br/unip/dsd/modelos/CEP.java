@@ -3,6 +3,8 @@ package br.unip.dsd.modelos;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -12,23 +14,24 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class CEP {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	
     @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "id")
-    private TipoLogradouro tipoLogradouro;
+    private TipoLogradouro tipoLogradouro = new TipoLogradouro();
 
     @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
     @PrimaryKeyJoinColumn
-    private Rua rua;
+    private Rua rua = new Rua();
     
     @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "id")
-    private Estado estado;
+    private Estado estado = new Estado();
 
     @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "id")
-    private Cidade cidade;
+    private Cidade cidade = new Cidade();
 
     public CEP(){
     	

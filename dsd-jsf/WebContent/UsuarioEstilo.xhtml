@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	 xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -19,125 +20,235 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	<link href="css/styles.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html" />
+	<link rel="stylesheet" type="text/css" media="all"
+		href="css/dirceu.css" />
 </h:head>
 
 <h:body>
-<div class="navbar navbar-fixed-top alt" data-spy="affix" data-offset-top="1000">
-  <div class="container">
-    <div class="navbar-header">
-      <a href="index.html" class="navbar-brand">Home</a>
-      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar">
-      <ul class="nav navbar-nav">
-        <li><a href="#sec1">Usuário</a></li>
-        <li><a href="#sec2">Endereço</a></li>
-        <li><a href="#sec3">Curso ...</a></li>
-        <li><a href="#sec4">?</a></li>
-      </ul>
-    </div>
-   </div>
-</div>
-
-<div class="header alt vert">
-  <div class="container">
-		<h:form styleClass="featurete" id="Usuario">
-		 <h2 class="lead text-center">Informações do Usuário</h2> 
-			<h:panelGrid columns="3">
-				<h:outputLabel for="nome" value="Nome:"
-					class="lead text-align: right;" />
-				<h:inputText id="nome" value="#{usuarioBean.usuario.nome}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="nome" style="color:red" />
-				<h:outputLabel for="email" value="Email:" class="lead" />
-				<h:inputText id="email" value="#{usuarioBean.usuario.email}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="email" style="color:red" />
-				<h:outputLabel for="confirmacaoEmail" class="lead"
-					value="Confirmacao Email:" />
-				<h:inputText id="confirmacaoEmail"
-					value="#{usuarioBean.confirmacaoEmail}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="confirmacaoEmail" style="color:red" />
-				<h:outputLabel for="senha" class="lead"
-					value="Senha:" />
-				<h:inputSecret id="senha" value="#{usuarioBean.usuarioSenha.password}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="senha" style="color:red" />
-				<h:outputLabel for="confirmacaoSenha" class="lead"
-					value="Confirmacao Senha:" />
-				<h:inputSecret id="confirmacaoSenha"
-					value="#{usuarioBean.confirmacaoSenha}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="confirmacaoSenha" style="color:red" />
-				<h:commandButton value="Cancelar" action="index" class="btn btn-default btn-lg" />
-				<h:commandButton value="Continuar ..." action="#{usuarioBean.register}"
-					class="btn btn-default btn-lg" ajax="false">
-					<f:param name="includeInSalvar" value="true" />
-				</h:commandButton>
-			</h:panelGrid>
-		</h:form>
+	<div class="navbar navbar-fixed-top alt" data-spy="affix"
+		data-offset-top="1000">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Home</a> <a
+					class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse"> <span class="icon-bar"></span>
+					<span class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar">
+				<ul class="nav navbar-nav">
+					<li><a href="#sec1">Usuário</a></li>
+					<li><a href="#sec2">Endereço</a></li>
+					<li><a href="#sec3">Curso ...</a></li>
+					<li><a href="#sec4">?</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-</div>
-<div class="featurette" id="sec2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-		 <div class="col-md-12 text-center">Passo 2, Endereço</div>
-<h:form styleClass="featurete" id="Endereco">
-			<h:panelGrid columns="3">
-				<h:outputLabel for="cep" value="CEP:"
-					class="lead text-align: right;" />
-				<h:inputText id="cep" 
-					value="#{enderecoBean.endereco.cep.id}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="cep" style="color:red" />
-				<h:outputLabel for="estado" value="Estado:" class="lead" />
-				<h:selectOneMenu id="estado"  
-value="#{enderecoBean.endereco.cep.estado.sigla}" style="color:black">  
-  <f:selectItems  
-   value="#{enderecoBean.listaEstados}" />  
-</h:selectOneMenu>   
-			
-				<h:message for="estado" style="color:red" />
-				<h:outputLabel for="cidade" class="lead"
-					value="Cidade:" />
-				<h:inputText id="cidade"
-					value="#{enderecoBean.endereco.cep.cidade.nome}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="cidade" style="color:red" />
-				<h:outputLabel for="rua" class="lead"
-					value="Rua:" />
-				<h:inputText id="rua"
-					value="#{enderecoBean.endereco.cep.rua.nome}"
-					required="#{not empty param.includeInSalvar}" />
-				<h:message for="rua" style="color:red" />
-				<h:commandButton value="Cancelar" action="index" class="btn btn-default btn-lg" />
-				<h:commandButton value="Continuar" action="#{usuarioBean.register}"
-					class="btn btn-default btn-lg" ajax="false">
-					<f:param name="includeInSalvar" value="true" />
-				</h:commandButton>
-			</h:panelGrid>
-		</h:form>
-      </div>
-    </div>
-    
-  </div>
-</div>
-<div class="callout" id="sec3">
-  <div class="vert">
-    <div class="col-md-12 text-center">Curso ...</div>
-   <!-- <div class="col-md-12 text-center">&nbsp;</div> --> 
-    <div class="col-md-8 col-md-offset-2 text-center">
-      <div class="row hidden-xs">
-           </div>
-    </div>
-  </div>
-</div>
+
+	<div class="header alt vert">
+		<div class="container">
+			<h:form styleClass="featurete" id="Usuario">
+				<h2 class="lead text-center">Informações do Usuário</h2>
+				<h:panelGrid columns="3">
+					<h:outputLabel for="nome" value="Nome:"
+						class="lead text-align: right;" />
+					<h:inputText id="nome" value="#{usuarioBean.usuario.nome}"
+						required="#{not empty param.includeInSalvar}"
+						pt:placeholder="Qual é o seu nome?" />
+					<h:message for="nome" class="errorMessage lead"/>
+					<h:outputLabel for="email" value="Email:" class="lead" />
+					<h:inputText id="email" value="#{usuarioBean.usuario.email}"
+						required="#{not empty param.includeInSalvar}"
+						pt:placeholder="Qual é o seu email principal?" />
+					<h:message for="email" class="errorMessage lead" />
+					<h:outputLabel for="confirmacaoEmail" class="lead"
+						value="Confirmacao Email:" />
+					<h:inputText id="confirmacaoEmail"
+						value="#{usuarioBean.confirmacaoEmail}"
+						required="#{not empty param.includeInSalvar}"
+						pt:placeholder="Confirme o seu email" />
+					<h:message for="confirmacaoEmail" class="errorMessage lead" />
+					<h:outputLabel for="senha" class="lead" value="Senha:" />
+					<h:inputSecret id="senha"
+						value="#{usuarioBean.usuarioSenha.password}"
+						required="#{not empty param.includeInSalvar}"
+						pt:placeholder="Qual é a sua senha?" />
+					<h:message for="senha" class="errorMessage lead"/>
+					<h:outputLabel for="confirmacaoSenha" class="lead"
+						value="Confirmacao Senha:" />
+					<h:inputSecret id="confirmacaoSenha"
+						value="#{usuarioBean.confirmacaoSenha}"
+						required="#{not empty param.includeInSalvar}"
+						pt:placeholder="Confirme a sua senha" />
+					<h:message for="confirmacaoSenha" class="errorMessage lead"/>
+					<h:commandButton value="Cancelar" action="index"
+						class="btn btn-default btn-lg" />
+					<h:commandButton value="Continuar ..."
+						action="#{usuarioBean.register}" class="btn btn-default btn-lg"
+						ajax="false">
+						<f:param name="includeInSalvar" value="true" />
+					</h:commandButton>
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</div>
+	<div class="featurette" id="sec2">
+		<div class="container" style="width:100%">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="col-md-12 text-center">
+						<H1>Detalhes do usuário</H1>
+					</div>
+					</div>
+					<h:form styleClass="featurete" id="Endereco" style="width:100%">
+						<h:panelGrid columns="3">
+						<h:outputLabel for="genero" value="Gênero" class="lead" />
+							<h:selectOneMenu id="genero"
+								value="#{usuarioDetalheBean.usuarioDetalhe.genero}"
+								class="btn btn-default">
+								<f:selectItem itemValue="#{null}"
+									itemLabel="Selecione ..." noSelectionOption="true" />
+								<f:selectItems value="#{usuarioDetalheBean.generos}" />
+							</h:selectOneMenu>
+							<span></span>
+							<h:outputLabel for="estadoCivil" value="Estado Civil" class="lead" />
+							<h:selectOneMenu id="estadoCivil"
+								value="#{usuarioDetalheBean.usuarioDetalhe.estadoCivil}"
+								class="btn btn-default">
+								<f:selectItem itemValue="#{null}"
+									itemLabel="Selecione ..." noSelectionOption="true" />
+								<f:selectItems value="#{usuarioDetalheBean.estadoCivil}" />
+							</h:selectOneMenu>
+							<span></span>
+							<h:outputLabel for="cep" value="CEP:"
+								class="lead text-align: right;" />
+							<h:inputText id="cep" value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.id}"
+								required="#{not empty param.includeInSalvar}" style="width:80%; color:black"
+								pt:placeholder="Qual é o seu CEP?" />
+							<h:message for="cep" class="errorMessage lead"/>
+							<h:outputLabel for="estado" value="Estado:" class="lead" />
+							<h:selectOneMenu id="estado"
+								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.estado.sigla}"
+								class="btn btn-default">
+								<f:selectItem itemValue="#{null}"
+									itemLabel="Selecione ..." noSelectionOption="true" />
+								<f:selectItems value="#{enderecoBean.listaEstados}" />
+							</h:selectOneMenu>
+							<span></span>
+							<h:outputLabel for="cidade" class="lead" value="Cidade:" />
+							<h:inputText id="cidade" style="color:black"
+								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.cidade.nome}"
+								required="#{not empty param.includeInSalvar}"
+								pt:placeholder="Qual é a sua cidade?" />
+							<h:message for="cidade" class="errorMessage lead"/>
+							<h:outputLabel for="logradouro" value="Logradouro:" class="lead" style="width:110%"/>
+							<h:selectOneMenu id="logradouro"
+								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.tipoLogradouro.nome}"
+								class="btn btn-default">
+								<f:selectItem itemValue="#{null}"
+									itemLabel="Selecione..."
+									noSelectionOption="true" />
+								<f:selectItems value="#{enderecoBean.listaTipoLogradouro}" />
+							</h:selectOneMenu>
+							<span></span>
+							<h:outputLabel for="rua" class="lead" value="Rua:" />
+							<h:inputText id="rua"
+								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.rua.nome}"
+								required="#{not empty param.includeInSalvar}"
+								pt:placeholder="Qual é o nome da sua Rua?" style="width:180%; ; color:black"/>
+							<h:message for="rua" class="errorMessage lead"/>
+							<h:commandButton value="Cancelar" action="index"
+								class="btn btn-default btn-lg" />
+							<h:commandButton value="Continuar"
+								action="#{usuarioDetalheBean.registrar}" class="btn btn-default btn-lg"
+								ajax="false">
+								<f:param name="includeInSalvar" value="true" />
+							</h:commandButton>
+						</h:panelGrid>
+					</h:form>
+				</div>
+			</div>
+
+	</div>
+	<div class="callout" id="sec3">
+		<div class="vert">
+			<div class="col-md-12 text-center">
+				<h1>Curso ...</h1>
+			</div>
+			<div class="col-md-12 text-center">
+				<div class="col-2">
+					<label> Name <input placeholder="What is your full name?"
+						id="name" name="name" tabindex="1" />
+					</label>
+				</div>
+				<div class="col-2">
+					<label> Company <input
+						placeholder="Where do you currently work?" id="company"
+						name="company" tabindex="2" />
+					</label>
+				</div>
+
+				<div class="col-3">
+					<label> Phone Number <input
+						placeholder="What is the best # to reach you?" id="phone"
+						name="phone" tabindex="3" />
+					</label>
+				</div>
+				<div class="col-3">
+					<label> Email <input
+						placeholder="What is your e-mail address?" id="email" name="email"
+						tabindex="4" />
+					</label>
+				</div>
+				<div class="col-3">
+					<label> Availability <select tabindex="5">
+							<option>5-15 hrs per week</option>
+							<option>15-30 hrs per week</option>
+							<option>30-40 hrs per week</option>
+					</select>
+					</label>
+				</div>
+
+				<div class="col-4">
+					<label> Skills <input
+						placeholder="List a few of your primary skills" id="skills"
+						name="skills" tabindex="6" />
+					</label>
+				</div>
+				<div class="col-4">
+					<label> Yrs Experience <input
+						placeholder="How many years of experience?" id="experience"
+						name="experience" tabindex="7" />
+					</label>
+				</div>
+				<div class="col-4">
+					<label>Contact References?</label>
+					<center style="position: relative; margin-bottom: 8px;">
+						<input type="checkbox" class="js-switch" />
+					</center>
+				</div>
+				<div class="col-4 switch">
+					<label>E-mail Updates?</label>
+					<center style="position: relative; margin-bottom: 8px;">
+						<input type="checkbox" class="js-switch" />
+					</center>
+				</div>
+
+				<div class="col-submit">
+					<button class="submitbtn">Submit Form</button>
+				</div>
+
+			</div>
+
+			<!-- <div class="col-md-12 text-center">&nbsp;</div> -->
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<div class="row hidden-xs"></div>
+			</div>
+		</div>
+	</div>
 
 </h:body>
 </html>

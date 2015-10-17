@@ -6,6 +6,7 @@ import br.unip.dsd.modelos.Endereco;
 import br.unip.dsd.modelos.EstadoCivil;
 import br.unip.dsd.modelos.Genero;
 import br.unip.dsd.modelos.Usuario;
+import br.unip.dsd.modelos.UsuarioDetalhe;
 import br.unip.dsd.modelos.UsuarioSenha;
 import br.unip.dsd.repositorios.RepositorioUsuario;
 import br.unip.dsd.repositorios.RepositorioUsuarioSenha;
@@ -33,16 +34,17 @@ public class UsuarioBean  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7728316233264714322L;
-	
+
 	private UsuarioSenha usuarioSenha = new UsuarioSenha();
 	private Usuario usuario = new Usuario();
 	private String confirmacaoSenha;
 	private String confirmacaoEmail;
 	private List<Usuario> usuarios = Collections.<Usuario>emptyList();
+	
 	@Autowired
 	private ServicoUsuario servicoUsuario;
-	
-	
+
+
 	public List<Usuario> getUsuarios() {
 		return servicoUsuario.findAll();
 	}
@@ -69,70 +71,26 @@ public class UsuarioBean  implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public List<SelectItem> getGenders() {
-		List<SelectItem> genders = new ArrayList<SelectItem>();
-		MessageFactory msg = new MessageFactory();
-
-		SelectItem item = new SelectItem();    
-		item.setLabel(msg.getMessage("masculino"));
-		item.setValue(Genero.MASCULINO.toString());
-		genders.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("feminino"));
-		item.setValue(Genero.FEMININO.toString());
-		genders.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("indefinido"));
-		item.setValue(Genero.INDEFINIDO.toString());
-		genders.add(item);
-		return genders;
-	}
-
-	public List<SelectItem> getEstadoCivil() {
-		List<SelectItem> maritalStati = new ArrayList<SelectItem>();
-		MessageFactory msg = new MessageFactory();
-
-		SelectItem item = new SelectItem();    
-		item.setLabel(msg.getMessage("casado"));
-		item.setValue(EstadoCivil.CASADO.toString());
-		maritalStati.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("solteiro"));
-		item.setValue(EstadoCivil.SOLTEIRO.toString());
-		maritalStati.add(item);
-
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("divorciado"));
-		item.setValue(EstadoCivil.DIVORCIADO.toString());
-		maritalStati.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("VIUVO"));
-		item.setValue(EstadoCivil.VIUVO.toString());
-		maritalStati.add(item);
-		return maritalStati; 
-	}
-
 	
-
 	public String register() throws Exception {
 		String toReturn = "failure";
 
 		if (validateData()) {
 			try {
 				servicoUsuario.gravaUsuario(usuario, usuarioSenha);
-//				usuarioSenha.setId(usuario.getId());
-//				usuarioSenha = repositorioUsuarioSenha.save(usuarioSenha);
+				//				usuarioSenha.setId(usuario.getId());
+				//				usuarioSenha = repositorioUsuarioSenha.save(usuarioSenha);
 				//        usuario = entities.createPerson(usuario);
 				String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId()+"#sec2";
 				toReturn = "success";
 				ExternalContext ec = FacesContext.getCurrentInstance()
-				        .getExternalContext();
+						.getExternalContext();
 				try {
-				    ec.redirect(ec.getRequestContextPath()
-				            + viewId);
+					ec.redirect(ec.getRequestContextPath()
+							+ viewId);
 				} catch (IOException e) {
-				    // TODO Auto-generated catch block
-				    e.printStackTrace();
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			} 
 			catch (EntityExistsException exist) {
@@ -194,7 +152,7 @@ public class UsuarioBean  implements Serializable{
 	public void setConfirmacaoSenha(String passwordConfirm) {
 		this.confirmacaoSenha = passwordConfirm;
 	}
-	
+
 	public String cancelar() {
 		this.confirmacaoEmail="";
 		this.usuario = new Usuario();

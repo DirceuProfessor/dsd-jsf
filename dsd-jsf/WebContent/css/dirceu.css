@@ -1,0 +1,9 @@
+/* -- custom css for Bootstrap 3.x --*/
+
+/* move special fonts to HTML head for better performance */
+@import url(http://fonts.googleapis.com/css?family=Voltaire);
+
+.errorMessage {
+	color:#980000!important;
+	font-size: 130%!important;
+}

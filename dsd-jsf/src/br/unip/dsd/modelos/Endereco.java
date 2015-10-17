@@ -20,7 +20,7 @@ public class Endereco {
 
     @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "id")
-    private CEP cep;
+    private CEP cep = new CEP();
 
     public Endereco(){
 

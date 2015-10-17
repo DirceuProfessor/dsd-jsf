@@ -18,6 +18,7 @@ public class ServicoUsuario {
 	@Autowired
 	private RepositorioUsuarioSenha repositorioUsuarioSenha;
 	
+	
 	@Transactional
 	public void gravaUsuario(Usuario usuario, UsuarioSenha usuarioSenha) {
 		usuarioSenha.setUsuario(usuario);
@@ -27,5 +28,6 @@ public class ServicoUsuario {
 	public List<Usuario> findAll() {
 		return repositorioUsuario.findAll();
 	}
+	
 	
 }
