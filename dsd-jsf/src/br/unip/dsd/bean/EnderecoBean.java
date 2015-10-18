@@ -62,6 +62,7 @@ public class EnderecoBean {
 		estados.add(new Estado(24l,"Bahia","BA"));
 		estados.add(new Estado(25l,"Minas Gerais","MG"));
 		estados.add(new Estado(26l,"Distrito Federal","DF"));
+		
 		repositorioEstado.save(estados);
 		List<TipoLogradouro> logradouros = new ArrayList<TipoLogradouro>();
 		logradouros.add(new TipoLogradouro(1l,"Rua"));

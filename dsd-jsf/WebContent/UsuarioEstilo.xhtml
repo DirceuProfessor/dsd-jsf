@@ -74,6 +74,7 @@
 					<h:outputLabel for="senha" class="lead" value="Senha:" />
 					<h:inputSecret id="senha"
 						value="#{usuarioBean.usuarioSenha.password}"
+						validator="validadorDeSenha"
 						required="#{not empty param.includeInSalvar}"
 						pt:placeholder="Qual é a sua senha?" />
 					<h:message for="senha" class="errorMessage lead"/>

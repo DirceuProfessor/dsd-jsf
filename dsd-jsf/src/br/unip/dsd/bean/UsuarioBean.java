@@ -15,6 +15,7 @@ import br.unip.dsd.service.ServicoUsuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.faces.context.*;
 import javax.faces.application.*;
@@ -44,7 +45,9 @@ public class UsuarioBean  implements Serializable{
 	@Autowired
 	private ServicoUsuario servicoUsuario;
 
-
+	public String getSenha(){
+		return usuarioSenha.getPassword();
+	}
 	public List<Usuario> getUsuarios() {
 		return servicoUsuario.findAll();
 	}

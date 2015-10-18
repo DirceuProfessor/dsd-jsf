@@ -21,7 +21,7 @@ public class Usuario implements Serializable{
     private String email;
     
 	@OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
-    public List<Endereco> endereco = Collections.<Endereco>emptyList();
+    private List<Endereco> endereco = Collections.<Endereco>emptyList();
 
     public Usuario() {
     }
