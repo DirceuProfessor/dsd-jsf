@@ -126,13 +126,13 @@
 							<span></span>
 							<h:outputLabel for="cep" value="CEP:"
 								class="lead text-align: right;" />
-							<h:inputText id="cep" value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.id}"
+							<h:inputText id="cep" value="#{usuarioDetalheBean.cep.CEP}"
 								required="#{not empty param.includeInSalvar}" style="width:80%; color:black"
 								pt:placeholder="Qual é o seu CEP?" />
 							<h:message for="cep" class="errorMessage lead"/>
 							<h:outputLabel for="estado" value="Estado:" class="lead" />
 							<h:selectOneMenu id="estado"
-								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.estado.sigla}"
+								value="#{usuarioDetalheBean.estado.sigla}"
 								class="btn btn-default">
 								<f:selectItem itemValue="#{null}"
 									itemLabel="Selecione ..." noSelectionOption="true" />
@@ -141,13 +141,13 @@
 							<span></span>
 							<h:outputLabel for="cidade" class="lead" value="Cidade:" />
 							<h:inputText id="cidade" style="color:black"
-								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.cidade.nome}"
+								value="#{usuarioDetalheBean.cidade.nome}"
 								required="#{not empty param.includeInSalvar}"
 								pt:placeholder="Qual é a sua cidade?" />
 							<h:message for="cidade" class="errorMessage lead"/>
 							<h:outputLabel for="logradouro" value="Logradouro:" class="lead" style="width:110%"/>
 							<h:selectOneMenu id="logradouro"
-								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.tipoLogradouro.nome}"
+								value="#{usuarioDetalheBean.tipoLogradouro.nome}"
 								class="btn btn-default">
 								<f:selectItem itemValue="#{null}"
 									itemLabel="Selecione..."
@@ -157,14 +157,14 @@
 							<span></span>
 							<h:outputLabel for="rua" class="lead" value="Rua:" />
 							<h:inputText id="rua"
-								value="#{usuarioDetalheBean.usuarioDetalhe.endereco.cep.rua.nome}"
+								value="#{usuarioDetalheBean.rua.nome}"
 								required="#{not empty param.includeInSalvar}"
 								pt:placeholder="Qual é o nome da sua Rua?" style="width:180%; ; color:black"/>
 							<h:message for="rua" class="errorMessage lead"/>
 							<h:commandButton value="Cancelar" action="index"
 								class="btn btn-default btn-lg" />
 							<h:commandButton value="Continuar"
-								action="#{usuarioDetalheBean.registrar}" class="btn btn-default btn-lg"
+								action="#{usuarioDetalheBean.registrar(usuarioBean.usuario)}" class="btn btn-default btn-lg"
 								ajax="false">
 								<f:param name="includeInSalvar" value="true" />
 							</h:commandButton>

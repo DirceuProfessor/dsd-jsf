@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -14,12 +15,15 @@ public class UsuarioDetalhe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@OneToOne//(cascade = CascadeType.DETACH)
 	@PrimaryKeyJoinColumn
+	@MapsId
 	private Usuario usuario;
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne
 	@PrimaryKeyJoinColumn
-	private Endereco endereco = new Endereco();
+	private Endereco endereco;
 	private String telefone;
 	private String CPF;
 	private String documento;

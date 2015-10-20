@@ -18,9 +18,9 @@ public class Endereco {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToOne(fetch= FetchType.LAZY)
+    @OneToOne(fetch= FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name = "id")
-    private CEP cep = new CEP();
+    private CEP cep ;
 
     public Endereco(){
 

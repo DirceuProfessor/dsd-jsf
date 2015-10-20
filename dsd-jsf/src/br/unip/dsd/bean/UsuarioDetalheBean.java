@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.unip.dsd.factory.MessageFactory;
-import br.unip.dsd.modelos.Endereco;
-import br.unip.dsd.modelos.EstadoCivil;
-import br.unip.dsd.modelos.Genero;
-import br.unip.dsd.modelos.UsuarioDetalhe;
+import br.unip.dsd.modelos.*;
 import br.unip.dsd.service.ServicoUsuarioDetalhe;
 
 @Component
@@ -27,10 +24,54 @@ public class UsuarioDetalheBean {
 	
 	private UsuarioDetalhe usuarioDetalhe = new UsuarioDetalhe();
 	private Endereco endereco = new Endereco();
-	
+	private CEP cep = new CEP();
+	private Cidade cidade = new Cidade();
+	private Estado estado = new Estado();
+	private Rua rua = new Rua();
+	private TipoLogradouro tipoLogradouro = new TipoLogradouro();
 	@Autowired
 	private ServicoUsuarioDetalhe servicoUsuarioDetalhe;
-	
+
+	public CEP getCep() {
+		return cep;
+	}
+
+	public void setCep(CEP cep) {
+		this.cep = cep;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Rua getRua() {
+		return rua;
+	}
+
+	public void setRua(Rua rua) {
+		this.rua = rua;
+	}
+
+	public TipoLogradouro getTipoLogradouro() {
+		return tipoLogradouro;
+	}
+
+	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
+		this.tipoLogradouro = tipoLogradouro;
+	}
+
 	public UsuarioDetalhe getUsuarioDetalhe() {
 		return usuarioDetalhe;
 	}
@@ -67,36 +108,21 @@ public class UsuarioDetalheBean {
 	}
 
 	public List<SelectItem> getEstadoCivil() {
-		List<SelectItem> maritalStati = new ArrayList<SelectItem>();
+		List<SelectItem> estadoCivil = new ArrayList<SelectItem>();
 		MessageFactory msg = new MessageFactory();
-
-		SelectItem item = new SelectItem();    
-		item.setLabel(msg.getMessage("casado"));
-		item.setValue(EstadoCivil.CASADO.toString());
-		maritalStati.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("solteiro"));
-		item.setValue(EstadoCivil.SOLTEIRO.toString());
-		maritalStati.add(item);
-
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("divorciado"));
-		item.setValue(EstadoCivil.DIVORCIADO.toString());
-		maritalStati.add(item);
-		item = new SelectItem();
-		item.setLabel(msg.getMessage("viuvo"));
-		item.setValue(EstadoCivil.VIUVO.toString());
-		maritalStati.add(item);
-		return maritalStati; 
+		
+		estadoCivil.add(new SelectItem(EstadoCivil.CASADO.toString(),msg.getMessage("casado")));    
+		estadoCivil.add(new SelectItem(EstadoCivil.SOLTEIRO.toString(),msg.getMessage("solteiro")));
+		estadoCivil.add(new SelectItem(EstadoCivil.DIVORCIADO.toString(),msg.getMessage("divorciado")));
+		estadoCivil.add(new SelectItem(EstadoCivil.VIUVO.toString(),msg.getMessage("viuvo")));
+		return estadoCivil; 
 	}
 
-	public String registrar() throws Exception {
+	public String registrar(Usuario usuario) throws Exception {
 		String toReturn="failure";
 		try{
-		    usuarioDetalhe.setEndereco(this.endereco);
-
-			servicoUsuarioDetalhe.gravaDetalhe(usuarioDetalhe);
-			String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId()+"#sec2";
+		    servicoUsuarioDetalhe.gravaDetalhe(usuario,usuarioDetalhe,endereco,rua,cidade,estado,tipoLogradouro,cep);
+			String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId()+"#sec3";
 			toReturn = "success";
 			ExternalContext ec = FacesContext.getCurrentInstance()
 					.getExternalContext();

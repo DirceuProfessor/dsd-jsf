@@ -15,11 +15,14 @@ public class CEP {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 	
-    @OneToOne(fetch= FetchType.LAZY)
+	private String CEP;
+	
+ 
+	@OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "id")
-    private TipoLogradouro tipoLogradouro = new TipoLogradouro();
+    private TipoLogradouro tipoLogradouro;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
     @PrimaryKeyJoinColumn
@@ -37,25 +40,30 @@ public class CEP {
     	
     }
     
-	public CEP(String id, TipoLogradouro tipoLogradouro, Rua rua,
+    public CEP(Long id, String cEP, TipoLogradouro tipoLogradouro, Rua rua,
 			Estado estado, Cidade cidade) {
 		super();
 		this.id = id;
+		CEP = cEP;
 		this.tipoLogradouro = tipoLogradouro;
 		this.rua = rua;
 		this.estado = estado;
 		this.cidade = cidade;
 	}
 
-	public String getId() {
-		return id;
-	}
+	public String getCEP() {
+ 		return CEP;
+ 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
+ 	public void setCEP(String cEP) {
+ 		CEP = cEP;
+ 	}
 
-	public TipoLogradouro getTipoLogradouro() {
+ 	public void setId(Long id) {
+ 		this.id = id;
+ 	}
+
+ 	public TipoLogradouro getTipoLogradouro() {
 		return tipoLogradouro;
 	}
 
@@ -91,6 +99,7 @@ public class CEP {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((CEP == null) ? 0 : CEP.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -109,6 +118,11 @@ public class CEP {
 		if (getClass() != obj.getClass())
 			return false;
 		CEP other = (CEP) obj;
+		if (CEP == null) {
+			if (other.CEP != null)
+				return false;
+		} else if (!CEP.equals(other.CEP))
+			return false;
 		if (cidade == null) {
 			if (other.cidade != null)
 				return false;
